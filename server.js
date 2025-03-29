@@ -7,7 +7,7 @@ dotenv.config();
 const app = express();
 const mongoose = require('mongoose');
 const connectDB = require('./config/dbConn');
-
+const authRoutes = require('./routes/authRoutes');
 // Connect to MongoDB
 console.log("Database URI:", process.env.DATABASE_URI);
 connectDB();
@@ -21,10 +21,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
-app.get('/', (req, res) => {
-  res.send('hello world');
-});
+// Routes
+app.use('/api/auth', authRoutes);
 
+// ... after routes
 app.use(errorHandler);
 
 mongoose.connection.once('open', () => {
