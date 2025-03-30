@@ -26,6 +26,18 @@ const UserSchema = new mongoose.Schema({
     enum: ['user', 'business', 'employee'],
     default: 'user',
   },
+  resetPasswordToken: {
+    type: String,
+    required: (false)
+  },
+  resetPasswordExpire: {
+    type: Date,
+    required: (false)
+  },
+  refreshToken: {
+    type: String,
+    required: (false)
+  },
   createdAt: {
     type: Date,
     default: Date.now,

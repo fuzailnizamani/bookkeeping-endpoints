@@ -17,14 +17,8 @@ exports.register = async (req, res) => {
       role,
     });
 
-    // Generate JWT token
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: '30d',
-    });
-
     res.status(201).json({
       success: true,
-      token,
       user: {
         id: user._id,
         name: user.name,
@@ -54,15 +48,40 @@ exports.login = async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ success: false, error: 'Invalid credentials' });
     }
-
+    const roles = Object.values(user.role);
     // Generate JWT token
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: '30d',
+    const accessToken = jwt.sign(
+      { 
+        "UserInfo": {
+          "id": user._id,
+          "roles": roles
+        }
+      }, 
+      process.env.JWT_SECRET, {
+      expiresIn: '30m',
+    });
+
+    const refreshToken = jwt.sign(
+      { "id": user._id },
+      process.env.REFRESH_TOKEN_SECRET,
+      { expiresIn: '1d' }
+    );
+
+    // 1. Add the refreshToken to the foundUser document
+    user.refreshToken = refreshToken;
+    // 2.Save the updated user document to MongoDB
+    const result = await user.save(); // This saves the updated user object with the new refreshToken
+
+    res.cookie('jwt', refreshToken, {
+      httpOnly: true, // Prevents JavaScript access (security)
+      sameSite: 'None', // Allows cross-site requests (important for frontend-backend comm.)
+      secure: false, // Set this to `true` for production (HTTPS)
+      maxAge: 24 * 60 * 60 * 1000 // Set cookie expiry time (1 day)
     });
 
     res.status(200).json({
       success: true,
-      token,
+      accessToken,
       user: {
         id: user._id,
         name: user.name,
@@ -79,10 +98,14 @@ exports.login = async (req, res) => {
 // @route   GET /api/auth/me
 exports.getMe = async (req, res) => {
   try {
+    console.log(req);
     const user = await User.findById(req.user.id);
+    if(!user){
+      res.status(404).json({ fail: 'user not match with this id'});
+    }
     res.status(200).json({ success: true, user });
   } catch (err) {
-    res.status(400).json({ success: false, error: err.message });
+    res.status(400).json({ success: false, error: err.message , text:'error'});
   }
 };
 
