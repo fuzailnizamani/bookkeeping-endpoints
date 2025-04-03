@@ -5,7 +5,10 @@ const {
   login, 
   getMe,
   forgotPassword, 
-  resetPassword
+  resetPassword, 
+  logout,
+  refreshToken,
+  updateUser
 } = require('../controllers/authController');
 const { protect , authorize} = require('../middleware/authMiddleware');
 
@@ -14,7 +17,9 @@ router.post('/login', login);
 router.get('/me', protect, getMe); // Protected route
 router.post('/forgot-password', forgotPassword);
 router.put('/reset-password/:resettoken', resetPassword);
-
+router.post('/logout', protect, logout);
+router.post('/refreshToken', refreshToken);
+router.put('/update', protect, updateUser);
 // Only 'business' role can access this
 router.get(
   '/dashboard',

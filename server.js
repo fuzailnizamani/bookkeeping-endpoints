@@ -8,6 +8,8 @@ const app = express();
 const mongoose = require('mongoose');
 const connectDB = require('./config/dbConn');
 const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/api/users');
+const cookieParser = require('cookie-parser');
 // Connect to MongoDB
 console.log("Database URI:", process.env.DATABASE_URI);
 connectDB();
@@ -19,11 +21,13 @@ app.use(logger);
 
 app.use(cors());
 app.use(express.json());
+// middleware for cookies
+app.use(cookieParser());
 app.use(express.urlencoded({extended: false}));
 
 // Routes
 app.use('/api/auth', authRoutes);
-
+app.use('/api/user', userRoutes);
 // ... after routes
 app.use(errorHandler);
 
