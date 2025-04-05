@@ -226,8 +226,6 @@ exports.refreshToken = async (req, res) => {
     process.env.REFRESH_TOKEN_SECRET,
     (err, decoded) => {
       if (err || foundUser.id !== decoded.id) return res.sendStatus(403);
-      console.log(decoded);
-      console.log(foundUser);
       const accessToken = jwt.sign(
         {
           "UserInfo": {
@@ -273,7 +271,6 @@ exports.updateUser = async (req, res, next) => {
 
       // 3. Handle Name/Avatar Updates
       if (req.body.name) user.name = req.body.name;
-      if (req.file) user.avatar = `/uploads/avatars/${req.file.filename}`;
 
       // Save all changes (triggers pre-save hooks for password hashing)
       const updatedUser = await user.save();
@@ -289,3 +286,34 @@ exports.updateUser = async (req, res, next) => {
     next(error);
   }
 }
+
+// @desc    verifying email
+// @route   PUT /api/auth/
+exports.verifyEmail = async (req, res, next) => {
+    try {
+        const { token } = req.query; // Get token from URL
+
+        if (!token) {
+            return res.status(400).json({ success: false, message: 'Invalid or missing token' });
+        }
+        console.log(token);
+
+        // Verify the token
+        const decoded = jwt.verify(token, process.env.EMAIL_SECRET);
+
+        // Find user by email
+        const user = await User.findOne({ email: decoded.email });
+
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+
+        // Mark email as verified
+        user.isEmailVerified = true;
+        await user.save();
+
+        res.status(200).json({ success: true, message: 'Email verified successfully' });
+    } catch (error) {
+        res.status(400).json({ success: false, message: 'Invalid or expired token' });
+    }
+};

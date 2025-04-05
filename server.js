@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 const connectDB = require('./config/dbConn');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/api/users');
+const isEmailVerified = require('./routes/auth');
 const cookieParser = require('cookie-parser');
 // Connect to MongoDB
 console.log("Database URI:", process.env.DATABASE_URI);
@@ -28,6 +29,7 @@ app.use(express.urlencoded({extended: false}));
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/auth', isEmailVerified);
 // ... after routes
 app.use(errorHandler);
 
