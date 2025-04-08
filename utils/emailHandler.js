@@ -1,13 +1,13 @@
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 
-const sendVerificationEmail = async (email) => {
+const sendVerificationEmail = async (options) => {
   try {
-      // Generate a verification token (valid for 1 hour)
-      const token = jwt.sign({ email }, process.env.EMAIL_SECRET, { expiresIn: '1h' });
-
-      const verificationLink = `${process.env.BASE_URL}/api/auth/verify-email?token=${token}`;
-
+      console.log(`console.log options: ${options}`);
+      console.log(options.to);
+      console.log(options.subject);
+      console.log(options.text);
+      console.log(process.env.EMAIL_USERNAME);
       const transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {
@@ -18,14 +18,13 @@ const sendVerificationEmail = async (email) => {
 
       const mailOptions = {
       from: process.env.EMAIL_USERNAME,
-      to: email,
-      subject: 'Verify Your New Email',
-      // html: `<p>Click <a href="${verificationLink}/verify-email?token=YOUR_TOKEN">here</a> to verify your email.</p>`,
-      html: `<p>Click <a href="${verificationLink}">here</a> to verify your email.</p>`,
+      to: options.to,
+      subject: options.subject,
+      html: options.text,
       };
 
       await transporter.sendMail(mailOptions);
-      console.log('Verification email sent to:', email);
+      console.log('Verification email sent to:', options.to);
   }catch (error) {
     console.error('Error sending email:', error);
     throw new Error('Email could not be sent');

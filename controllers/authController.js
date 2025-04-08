@@ -262,13 +262,6 @@ exports.updateUser = async (req, res, next) => {
         user.password = req.body.password; // Will auto-hash via UserSchema pre('save')
       }
 
-      // 2. Handle Email Verification (if email is being changed)
-      if (req.body.email && req.body.email !== user.email) {
-        user.email = req.body.email;
-        user.isEmailVerified = false; // Mark as unverified
-        await sendVerificationEmail(req.body.email); // Send verification email
-      }
-
       // 3. Handle Name/Avatar Updates
       if (req.body.name) user.name = req.body.name;
 
@@ -287,33 +280,70 @@ exports.updateUser = async (req, res, next) => {
   }
 }
 
+// @desc    Update user email
+// @route   PUT /api/auth/update
+exports.updateEmail = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+
+    const { newEmail } = req.body;
+    if (!newEmail) {
+      return res.status(400).json({ success: false, error: 'Please provide a new email' });
+    }
+
+    // Generate token
+    const resetToken = crypto.randomBytes(20).toString('hex');
+    const hashedToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+
+    user.newEmail = newEmail;
+    user.emailVerificationToken = hashedToken;
+    user.emailVerificationExpire = Date.now() + 30 * 60 * 1000; // 30 minutes
+
+    await user.save();
+
+    // Create verification URL
+    const verifyURL = `${process.env.BASE_URL}/api/auth/verify-email-change/${resetToken}`;
+
+    await sendVerificationEmail ({
+      to: newEmail,
+      subject: 'Confirm Your New Email',
+      text: `Click the link to confirm your new email: ${verifyURL}`,
+    });
+
+    res.status(200).json({ success: true, message: 'Verification email sent' });
+  } catch(err) {
+    res.status(500).json({ success: false, error: 'Server error' });
+  }
+};
+
 // @desc    verifying email
 // @route   PUT /api/auth/
-exports.verifyEmail = async (req, res, next) => {
+exports.verifyEmail = async (req, res) => {
     try {
-        const { token } = req.query; // Get token from URL
+      console.log(req.params.token);
+      console.log(req.params);
+      const hashedToken = crypto.createHash('sha256').update(req.params.token).digest('hex');
 
-        if (!token) {
-            return res.status(400).json({ success: false, message: 'Invalid or missing token' });
-        }
-        console.log(token);
+      const user = await User.findOne({
+        emailVerificationToken: hashedToken,
+        emailVerificationExpire: { $gt: Date.now() },
+      });
 
-        // Verify the token
-        const decoded = jwt.verify(token, process.env.EMAIL_SECRET);
+      if (!user) {
+        return res.status(400).json({ success: false, error: 'Invalid or expired token' });
+      }
 
-        // Find user by email
-        const user = await User.findOne({ email: decoded.email });
-
-        if (!user) {
-            return res.status(404).json({ success: false, message: 'User not found' });
-        }
-
-        // Mark email as verified
-        user.isEmailVerified = true;
-        await user.save();
-
-        res.status(200).json({ success: true, message: 'Email verified successfully' });
+      // Update email and clear temporary fields
+      user.email = user.newEmail;
+      user.newEmail = undefined;
+      user.emailVerificationToken = undefined;
+      user.emailVerificationExpire = undefined;
+      // Mark email as verified
+      user.isEmailVerified = true;
+      await user.save();
+      // Success message
+      res.status(200).send('<h1>Email successfully verified!</h1><p>You can now <a href="/login">log in</a>.</p>');
     } catch (error) {
-        res.status(400).json({ success: false, message: 'Invalid or expired token' });
+      res.status(500).send('<h1>Server error</h1><p>Please try again later.</p>');
     }
 };

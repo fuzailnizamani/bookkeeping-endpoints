@@ -43,6 +43,11 @@ const UserSchema = new mongoose.Schema({
     required: (true),
     default: false
   },
+  newEmail: {
+    type: String,
+  },
+  emailVerificationToken: String,
+  emailVerificationExpire: Date,
   createdAt: {
     type: Date,
     default: Date.now,
