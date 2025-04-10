@@ -46,6 +46,11 @@ const UserSchema = new mongoose.Schema({
   newEmail: {
     type: String,
   },
+  // ... existing fields ...
+  businesses: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Business',
+  }],
   emailVerificationToken: String,
   emailVerificationExpire: Date,
   createdAt: {
