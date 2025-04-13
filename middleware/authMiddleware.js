@@ -26,11 +26,24 @@ exports.protect = async (req, res, next) => {
 // Role-based access control (e.g., 'business', 'employee')
 exports.authorize = (...roles) => {
   return async (req, res, next) => {
-    const business = await Business.findById(req.params.businessId);
+    if (!roles.includes(req.user.role)) {
+      return res.status(403).json({
+        success: false,
+        error: `User role '${req.user.role}' is not authorized`,
+      });
+    }
+    next();
+  };
+};
+
+// Role-based access control (e.g., 'business', 'employee')
+exports.businessAuthorize = (...roles) => {
+  return async (req, res, next) => {
+    const business = await Business.findOne({ owner: req.params.businessId} );
     const employee = business.employees.find(
       emp => emp.user.toString() === req.user.id
     );
-    if (!roles.includes(req.user.role)) {
+    if (!roles.includes(employee?.role)) {
       return res.status(403).json({
         success: false,
         error: `User role '${req.user.role}' is not authorized`,

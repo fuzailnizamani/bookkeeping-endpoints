@@ -4,15 +4,17 @@ const {
   createBusiness,
   inviteEmployee,
   getEmployees,
-  handleInvitation
+  handleInvitation,
+  getMyBusiness,
+  removeEmployee
 } = require('../controllers/businessController');
-const { protect, authorize } = require('../middleware/authMiddleware');
+const { protect, authorize, businessAuthorize } = require('../middleware/authMiddleware');
 
 router.post('/', protect, createBusiness);
 router.post(
   '/:businessId/invite',
   protect,
-  authorize('admin'), // Only business owners/admins can invite
+  businessAuthorize('admin'), // Only business owners/admins can invite
   inviteEmployee
 );
 router.get(
@@ -30,6 +32,19 @@ router.put(
   '/invite/reject',
   protect,
   handleInvitation
+);
+
+router.get(
+  '/my-business',
+  protect,
+  getMyBusiness
+);
+
+router.delete(
+  '/:businessId/employees/:employeeId',
+  protect,
+  businessAuthorize('admin'),
+  removeEmployee
 );
 
 module.exports = router;

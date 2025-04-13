@@ -162,3 +162,55 @@ exports.handleInvitation = async (req, res, next) => {
     next(err);
   }
 };
+
+// @desc    Get business details for the owner
+// @route   GET /api/business/my-business
+exports.getMyBusiness = async (req, res, next) => {
+  try {
+    const business = await Business.findOne({ owner: req.user.id })
+      .populate('employees.user', 'name email role');
+
+    if (!business) {
+      return next(new ErrorResponse('No business found for this user', 404));
+    }
+
+    res.status(200).json({
+      success: true,
+      data: business,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+
+// @desc    Remove employee
+// @route   DELETE /api/business/employees/:employeeId
+exports.removeEmployee = async (req, res, next) => {
+  try {
+    const business = await Business.findOne({ owner: req.user.id });
+    if (!business) {
+      return next(new ErrorResponse('Business not found', 404));
+    }
+
+    // Filter out the employee
+    business.employees = business.employees.filter(
+      emp => emp.user.toString() !== req.params.employeeId
+    );
+
+    await business.save();
+
+    // Optional: Remove business from user's businesses array
+    await User.findByIdAndUpdate(
+      req.params.employeeId,
+      { $pull: { businesses: business._id } }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: 'Employee removed',
+    });
+  } catch (err) {
+    next(err);
+  }
+};
