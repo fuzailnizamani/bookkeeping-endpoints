@@ -11,6 +11,7 @@ const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/api/users');
 const isEmailVerified = require('./routes/auth');
 const businessRoutes = require('./routes/businessRoutes');
+const transactionRoutes = require('./routes/transactionRoutes');
 const cookieParser = require('cookie-parser');
 // Connect to MongoDB
 console.log("Database URI:", process.env.DATABASE_URI);
@@ -28,10 +29,11 @@ app.use(cookieParser());
 app.use(express.urlencoded({extended: false}));
 
 // Routes
-app.use('/api/business', businessRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/auth', isEmailVerified);
+app.use('/api/business', businessRoutes);
+app.use('/api/transactions', transactionRoutes);
 //...after routes
 app.use(errorHandler);
 

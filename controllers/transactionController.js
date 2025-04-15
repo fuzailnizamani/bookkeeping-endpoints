@@ -116,7 +116,7 @@ exports.deleteTransaction = async (req, res, next) => {
       return next(new ErrorResponse('Not authorized to delete', 401));
     }
 
-    await transaction.remove();
+    await transaction.deleteOne();
 
     res.status(200).json({
       success: true,
