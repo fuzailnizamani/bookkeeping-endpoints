@@ -325,3 +325,16 @@
 20250415	20:13:42	c1559e55-843b-4d9e-a82d-90fe12263d7c	GET	undefined	/api/transactions/summary?businessId=67fa2d0dd2b2196af6f376a6&period=day
 20250415	20:15:11	9d19d182-f9db-476d-b4c9-40b3b0c18149	GET	undefined	/api/transactions/summary?businessId=67fa2d0dd2b2196af6f376a6&period=day
 20250415	20:26:30	68ec39b3-00cc-400d-9399-69b3e8369f66	GET	undefined	/api/transactions/summary?businessId=67fa2d0dd2b2196af6f376a6&period=day
+20250417	15:42:02	05dbede9-9804-4be3-a3de-135a845771b5	POST	undefined	/api/auth/login
+20250417	15:42:27	3d5841cf-c83f-4e16-afcd-8df7699cec91	POST	undefined	/api/categories/
+20250417	15:45:08	6415586b-1433-49a7-bbee-53eb999f83d1	POST	undefined	/api/categories/67fa2d0dd2b2196af6f376a6
+20250417	15:45:29	a66f41cc-51b6-4e16-ac39-042ed643615f	POST	undefined	/api/categories/67fa2d0dd2b2196af6f376a6
+20250417	15:47:40	f2dcad8d-687f-4c08-8f4c-16463463ba22	POST	undefined	/api/categories/67fa2d0dd2b2196af6f376a6
+20250417	15:51:08	f9fae607-d078-4474-9ab2-dcec25e0cd00	POST	undefined	/api/categories/67fa2d0dd2b2196af6f376a6
+20250417	15:52:53	42100d2f-118c-4130-85ad-095325931475	GET	undefined	/api/categories?businessId=67fa2d0dd2b2196af6f376a6
+20250417	15:56:50	7d49b532-c77a-42a0-a5ee-4af7d4a72bfe	POST	undefined	/api/categories/67fa2d0dd2b2196af6f376a6
+20250417	15:57:55	be1f0d2d-d8e4-4b1a-b91d-f62d682e801b	DELETE	undefined	/api/categories/6800dc4d55d7b5b3f99d110c
+20250417	15:58:57	e9fc0438-95a0-4b02-a109-cc8aa14cde21	DELETE	undefined	/api/categories/67fa2d0dd2b2196af6f376a6/6800dc4d55d7b5b3f99d110c
+20250417	15:59:48	a1093b80-150b-4e9a-9c93-dbf3d17eda25	DELETE	undefined	/api/categories/67fa2d0dd2b2196af6f376a6/6800dc4d55d7b5b3f99d110c
+20250417	16:00:15	a02a1e55-b359-401d-a1ef-700a33e4f45c	DELETE	undefined	/api/categories/67fa2d0dd2b2196af6f376a6/6800dd1c55d7b5b3f99d1112
+20250417	16:01:18	244e1f46-d33d-42b1-8024-1accfaeb70c7	DELETE	undefined	/api/categories/67fa2d0dd2b2196af6f376a6/6800de7255d7b5b3f99d111b

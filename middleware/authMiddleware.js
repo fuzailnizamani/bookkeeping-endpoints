@@ -39,11 +39,28 @@ exports.authorize = (...roles) => {
 // Role-based access control (e.g., 'business', 'employee')
 exports.businessAuthorize = (...roles) => {
   return async (req, res, next) => {
-    const business = await Business.findOne({ owner: req.params.businessId} );
+    const business = await Business.findById(req.params.businessId);
+    // const business = await Business.findOne({ owner: req.params.businessId} );
+
+    if (!business) {
+      return res.status(404).json({
+        success: false,
+        error: 'Business not found',
+      });
+    }
+
+    // ✅ Allow if the user is the business owner
+    if (business.owner.toString() === req.user.id) {
+      return next();
+    }
+
+    // ✅ Otherwise, check if user is an employee with required role
     const employee = business.employees.find(
       emp => emp.user.toString() === req.user.id
     );
-    if (!roles.includes(employee?.role)) {
+
+    
+    if (!employee || !roles.includes(employee.role)) {
       return res.status(403).json({
         success: false,
         error: `User role '${req.user.role}' is not authorized`,
