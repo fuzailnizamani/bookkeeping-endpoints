@@ -1,5 +1,5 @@
 const Transaction = require('../models/Transaction');
-const ErrorResponse  = require('../utils/errorResponse');
+const ErrorResponse = require('../utils/errorResponse');
 const PDFDocument = require('pdfkit');
 const { Parser } = require('json2csv');
 
@@ -11,9 +11,9 @@ exports.getProfitLossReport = async (req, res, next) => {
 
     const transactions = await Transaction.find({
       business: businessId,
-      date: { 
-        $gte: new Date(startDate || '1970-01-01'), 
-        $lte: new Date(endDate || Date.now()) 
+      date: {
+        $gte: new Date(startDate || '1970-01-01'),
+        $lte: new Date(endDate || Date.now())
       }
     });
 
@@ -63,26 +63,26 @@ exports.getCashFlowStatement = async (req, res, next) => {
       const doc = new PDFDocument();
       res.setHeader('Content-Type', 'application/pdf');
       res.setHeader('Content-Disposition', 'attachment; filename=cash-flow.pdf');
-      
+
       doc.pipe(res);
       doc.fontSize(18).text('Cash Flow Statement', { align: 'center' });
       doc.moveDown();
-      
+
       cashFlowData.forEach(t => {
         doc.fontSize(10)
           .text(`${t.date} | ${t.description} | ${t.type.toUpperCase()} | $${t.amount}`);
       });
-      
+
       doc.end();
-    } 
+    }
     else if (format === 'csv') {
       const parser = new Parser();
       const csv = parser.parse(cashFlowData);
-      
+
       res.setHeader('Content-Type', 'text/csv');
       res.setHeader('Content-Disposition', 'attachment; filename=cash-flow.csv');
       res.send(csv);
-    } 
+    }
     else {
       res.status(200).json({ success: true, data: cashFlowData });
     }
@@ -96,13 +96,13 @@ exports.getCashFlowStatement = async (req, res, next) => {
 exports.getExpenseBreakdown = async (req, res, next) => {
   try {
     const { businessId } = req.query;
-    
+
     const expenses = await Transaction.aggregate([
-      { 
-        $match: { 
+      {
+        $match: {
           business: mongoose.Types.ObjectId(businessId),
-          type: 'expense' 
-        } 
+          type: 'expense'
+        }
       },
       {
         $group: {
@@ -132,13 +132,13 @@ exports.getExpenseBreakdown = async (req, res, next) => {
 exports.getIncomeBreakdown = async (req, res, next) => {
   try {
     const { businessId } = req.query;
-    
+
     const income = await Transaction.aggregate([
-      { 
-        $match: { 
+      {
+        $match: {
           business: mongoose.Types.ObjectId(businessId),
-          type: 'income' 
-        } 
+          type: 'income'
+        }
       },
       {
         $group: {
