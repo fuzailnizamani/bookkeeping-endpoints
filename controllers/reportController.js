@@ -90,7 +90,6 @@ exports.getCashFlowStatement = async (req, res, next) => {
     next(err);
   }
 };
-
 // @desc    Get expense breakdown by category
 // @route   GET /api/reports/expense-breakdown
 exports.getExpenseBreakdown = async (req, res, next) => {
@@ -126,7 +125,6 @@ exports.getExpenseBreakdown = async (req, res, next) => {
     next(err);
   }
 };
-
 // @desc    Get income breakdown by category
 // @route   GET /api/reports/income-breakdown
 exports.getIncomeBreakdown = async (req, res, next) => {
