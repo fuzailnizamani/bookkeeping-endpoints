@@ -288,4 +288,12 @@
 20250413	19:30:43	e4b4b496-1b56-48bc-aacb-d1b6893a4e58	DELETE	undefined	/api/business/employees/:employeeId
 20250413	19:34:41	8e5b57e8-26f4-4e83-a097-2d9aa8202b8c	POST	undefined	/api/auth/login
 20250413	19:34:54	55825184-3fd8-4793-8060-10fdadcd1d2d	POST	undefined	/api/auth/login
-20250413	19:35:10	d0c91ffb-1f5f-4bf2-ba30-f9c815feedf4	DELETE	undefined	/api/business/employees/67eb8984123431a7e5f9ede2
+20250413	19:35:10	d0c91ffb-1f5f-4bf2-ba30-f9c815feedf4	DELETE	undefined	/api/business/employees/67eb8984123431a7e5f9ede220250427	16:43:05	951ea4ad-2cf3-480a-817d-aa43f41d79ea	POST	undefined	/api/auth/login
+20250427	16:44:04	bc8ada9f-da8c-42ef-a8a8-0a4d7ff89e5f	GET	undefined	/api/business/67fa2d0dd2b2196af6f376a6/employees
+20250427	16:44:13	1ac727a6-5490-4b14-a860-1cd3064150f4	GET	undefined	/api/business/67fa2d0dd2b2196af6f376a6/employees
+20250427	16:47:46	4d287d5e-20fc-4e70-a4ba-91c1fe5d7152	GET	undefined	/api/business/67fa2d0dd2b2196af6f376a6/employees
+20250427	16:47:53	ee9e600a-cba9-45a2-bba6-bdfd2e52817f	GET	undefined	/api/reports/profit-loss&businessId=67fa2d0dd2b2196af6f376a7&startDate=2025-01-01&endDate=2025-4-27
+20250427	16:54:09	87863621-d4bf-4207-a0ba-e9497f15e443	GET	undefined	/api/reports/cash-flow&businessId=67fa2d0dd2b2196af6f376a7
+20250427	16:58:22	daba3e74-82a6-451c-a23f-89c1f6065ce5	GET	undefined	/api/reports/profit-loss?businessId=67fa2d0dd2b2196af6f376a7&startDate=2025-01-01&endDate=2025-4-27
+20250427	16:58:36	da402aed-7352-4fe6-82a6-babad9fb2e2d	GET	undefined	/api/reports/cash-flow?businessId=67fa2d0dd2b2196af6f376a7
+20250427	17:04:31	651c57ea-6438-4686-97a2-4955a2dd81a0	GET	undefined	/api/reports/profit-loss?businessId=67fa2d0dd2b2196af6f376a7&startDate=2025-04-15&endDate=2025-4-10

@@ -2,6 +2,7 @@ const Transaction = require('../models/Transaction');
 const ErrorResponse = require('../utils/errorResponse');
 const PDFDocument = require('pdfkit');
 const { Parser } = require('json2csv');
+
 // @desc    Get profit/loss report
 // @route   GET /api/reports/profit-loss
 exports.getProfitLossReport = async (req, res, next) => {
