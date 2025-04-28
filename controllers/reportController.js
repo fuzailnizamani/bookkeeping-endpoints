@@ -2,18 +2,19 @@ const Transaction = require('../models/Transaction');
 const ErrorResponse = require('../utils/errorResponse');
 const PDFDocument = require('pdfkit');
 const { Parser } = require('json2csv');
+const mongoose = require('mongoose');
 
 // @desc    Get profit/loss report
 // @route   GET /api/reports/profit-loss
 exports.getProfitLossReport = async (req, res, next) => {
   try {
     const { businessId, startDate, endDate } = req.query;
-
+    console.log(businessId);
     const transactions = await Transaction.find({
       business: businessId,
-      date: {
-        $gte: new Date(startDate || '1970-01-01'),
-        $lte: new Date(endDate || Date.now())
+      date: { 
+        $gte: new Date(startDate || '2025-01-01'), 
+        $lte: new Date(endDate || Date.now()) 
       }
     });
 
@@ -41,6 +42,7 @@ exports.getProfitLossReport = async (req, res, next) => {
     next(err);
   }
 };
+
 // @desc    Get cash flow statement (PDF/CSV)
 // @route   GET /api/reports/cash-flow
 exports.getCashFlowStatement = async (req, res, next) => {
@@ -98,7 +100,7 @@ exports.getExpenseBreakdown = async (req, res, next) => {
     const expenses = await Transaction.aggregate([
       {
         $match: {
-          business: mongoose.Types.ObjectId(businessId),
+          business: new mongoose.Types.ObjectId(businessId),
           type: 'expense'
         }
       },
@@ -111,7 +113,7 @@ exports.getExpenseBreakdown = async (req, res, next) => {
       },
       { $sort: { total: -1 } }
     ]);
-
+    console.log(expenses);
     res.status(200).json({
       success: true,
       data: expenses.map(item => ({
@@ -133,7 +135,7 @@ exports.getIncomeBreakdown = async (req, res, next) => {
     const income = await Transaction.aggregate([
       {
         $match: {
-          business: mongoose.Types.ObjectId(businessId),
+          business: new mongoose.Types.ObjectId(businessId),
           type: 'income'
         }
       },
