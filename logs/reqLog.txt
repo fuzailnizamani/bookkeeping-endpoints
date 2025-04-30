@@ -356,3 +356,10 @@
 20250428	16:47:24	b0e09bbc-6822-4dae-a01f-9c540b8a38f3	GET	undefined	/api/reports/expense-breakdown?businessId=67fa2d0dd2b2196af6f376a6
 20250428	16:51:45	6a74394b-e57a-48f6-8f38-4d722356ec23	GET	undefined	/api/reports/income-breakdown?businessId=67fa2d0dd2b2196af6f376a6
 20250428	16:52:47	d102c5be-40d5-4089-b1cb-3374bdb2729f	GET	undefined	/api/reports/income-breakdown?businessId=67fa2d0dd2b2196af6f376a6
+20250430	15:44:28	15a0262a-c030-42ee-8035-721bde508451	POST	undefined	/api/auth/login
+20250430	15:45:03	6b025ae7-6b34-415d-9999-5f969627ec51	GET	undefined	/api/dashboard/summary?businessId=67fa2d0dd2b2196af6f376a6
+20250430	15:46:51	9915a195-9acb-40fa-9378-211c16c244ed	GET	undefined	/api/dashboard/recent-transactions?businessId=67fa2d0dd2b2196af6f376a6
+20250430	15:49:12	235e4544-90a1-4531-8d3d-e44bf927ec21	GET	undefined	/api/dashboard/chart-data?businessId=67fa2d0dd2b2196af6f376a6
+20250430	15:50:04	4a010d93-c05b-4ece-b0f0-aead43a1e7d2	GET	undefined	/api/dashboard/chart-data?businessId=67fa2d0dd2b2196af6f376a6
+20250430	15:52:38	8a417133-30e6-42b1-86cb-f2c7d284e444	GET	undefined	/api/categories?businessId=67fa2d0dd2b2196af6f376a6
+20250430	15:53:23	a57e0c62-6f8e-4724-ade9-25d808584652	GET	undefined	/api/categories?businessId=67fa2d0dd2b2196af6f376a6
