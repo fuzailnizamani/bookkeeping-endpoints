@@ -32,6 +32,10 @@ const TransactionSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
+  receipt: {
+    public_id: String,  // Cloudinary identifier
+    url: String        // Cloudinary URL
+  },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Transaction', TransactionSchema);

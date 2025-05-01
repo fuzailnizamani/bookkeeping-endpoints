@@ -363,3 +363,13 @@
 20250430	15:50:04	4a010d93-c05b-4ece-b0f0-aead43a1e7d2	GET	undefined	/api/dashboard/chart-data?businessId=67fa2d0dd2b2196af6f376a6
 20250430	15:52:38	8a417133-30e6-42b1-86cb-f2c7d284e444	GET	undefined	/api/categories?businessId=67fa2d0dd2b2196af6f376a6
 20250430	15:53:23	a57e0c62-6f8e-4724-ade9-25d808584652	GET	undefined	/api/categories?businessId=67fa2d0dd2b2196af6f376a6
+20250501	13:47:50	088e67da-ed87-4530-aa0c-92020f3ffb10	POST	undefined	/api/auth/login
+20250501	13:48:10	30f09ce6-9281-42ec-b71c-284ab8d5970a	GET	undefined	/api/upload/receipt
+20250501	13:49:57	ee735fe8-0e1a-44bf-90bf-c8b38b2c36ef	GET	undefined	/api/upload/receipt
+20250501	13:50:21	8056ae48-3d20-4e66-935a-07a1e4976b58	POST	undefined	/api/upload/receipt
+20250501	13:57:31	7d6bfc4c-a72a-4e8f-9d99-d37e0a0815ec	GET	undefined	/api/upload/receipt/:67fe6d53e1d4e5a2377d5b22
+20250501	14:00:22	30906dcf-9ba3-4728-832b-c55f9cb737fd	GET	undefined	/api/upload/receipt/:67fe6d53e1d4e5a2377d5b22
+20250501	14:00:27	fe73266e-6457-4416-92f3-b29229660444	GET	undefined	/api/upload/receipt/:67fe6d53e1d4e5a2377d5b22
+20250501	14:00:37	ea664a4e-46ed-44e3-a2da-db55eecfd83d	GET	undefined	/api/upload/receipt/67fe6d53e1d4e5a2377d5b22
+20250501	14:01:04	4757d725-155d-468e-838c-f56a08a1cfbc	GET	undefined	/api/upload/receipt/67fe6c3ee1d4e5a2377d5b1c
+20250501	14:01:12	9f230961-bddb-43cd-a563-ceea7349d140	GET	undefined	/api/upload/receipt/67fe6d53e1d4e5a2377d5b22
