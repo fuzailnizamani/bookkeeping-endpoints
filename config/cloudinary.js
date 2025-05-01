@@ -8,14 +8,15 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Set up storage engine for Multer
 const storage = new CloudinaryStorage({
   cloudinary,
-  params: {
+  params: (req, file) => ({
     folder: 'bookkeeping-receipts',
+    public_id: file.fieldname + '-' + Date.now(),
     allowed_formats: ['jpg', 'jpeg', 'png', 'pdf'],
+    resource_type: file.mimetype.startsWith('image') ? 'image' : 'raw',
     transformation: [{ width: 500, height: 500, crop: 'limit' }]
-  },
+  }),
 });
 
 module.exports = {

@@ -49,8 +49,13 @@ exports.uploadReceipt = [
 // @route   GET /api/upload/receipt/:id
 exports.getReceipt = async (req, res, next) => {
   try {
-    const transaction = await Transaction.findById(req.params.id);
-    
+    const transaction = await Transaction.findOne({
+      _id: req.params.id,
+      $or: [
+        { createdBy: req.user.id },
+        { business: { $in: req.user.businesses || [] } } // Check if user has access
+      ]
+    });
     if (!transaction?.receipt?.url) {
       return next(new ErrorResponse('Receipt not found', 404));
     }
