@@ -17,6 +17,7 @@ const categoryRoutes = require('./routes/categoryRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
 const cookieParser = require('cookie-parser');
+const notificationRoutes = require('./routes/notificationRoutes');
 // Connect to MongoDB
 console.log("Database URI:", process.env.DATABASE_URI);
 connectDB();
@@ -42,6 +43,7 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/reports', reportRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/notifications', notificationRoutes);
 //...after routes
 app.use(errorHandler);
 

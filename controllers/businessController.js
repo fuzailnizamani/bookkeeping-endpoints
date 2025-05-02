@@ -1,6 +1,8 @@
 const Business = require('../models/Business');
 const User = require('../models/User');
 const ErrorResponse = require('../utils/errorResponse');
+const { createNotification } = require('../utils/notificationHelper');
+
 // @desc    Create a business
 // @route   POST /api/business
 exports.createBusiness = async (req, res, next) => {
@@ -60,6 +62,15 @@ exports.inviteEmployee = async (req, res, next) => {
 
     // In production: Send email invitation
     console.log(`Invitation sent to ${email}`);
+
+    // Create notification for invited employee
+    await createNotification({
+      userId: employee._id,
+      message: `You've been invited to ${business.name}`,
+      type: 'invite',
+      relatedEntityId: business._id,
+      onModel: 'Business'
+    });
 
     res.status(200).json({
       success: true,

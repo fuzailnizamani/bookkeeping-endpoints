@@ -1,5 +1,6 @@
 const Transaction = require('../models/Transaction');
 const ErrorResponse = require('../utils/errorResponse');
+const { createNotification } = require('../utils/notificationHelper');
 
 // @desc    Add new transaction
 // @route   POST /api/transactions/add
@@ -14,6 +15,15 @@ exports.addTransaction = async (req, res, next) => {
       category,
       business: businessId,
       createdBy: req.user.id,
+    });
+
+    // Create notification
+    await createNotification({
+      userId: req.user.id,
+      message: `New ${transaction.type} added: $${transaction.amount}`,
+      type: 'transaction',
+      relatedEntityId: transaction._id,
+      onModel: 'Transaction'
     });
 
     res.status(201).json({
