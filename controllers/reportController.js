@@ -9,7 +9,6 @@ const mongoose = require('mongoose');
 exports.getProfitLossReport = async (req, res, next) => {
   try {
     const { businessId, startDate, endDate } = req.query;
-    console.log(businessId);
     const transactions = await Transaction.find({
       business: businessId,
       date: { 
@@ -113,7 +112,6 @@ exports.getExpenseBreakdown = async (req, res, next) => {
       },
       { $sort: { total: -1 } }
     ]);
-    console.log(expenses);
     res.status(200).json({
       success: true,
       data: expenses.map(item => ({

@@ -65,8 +65,13 @@ exports.forgotPassword = async (req, res, next) => {
     user.resetPasswordExpire = Date.now() + 30 * 60 * 1000; // 30 minutes expiry
     await user.save();
 
-    // In production: Send email with resetToken (e.g., via Nodemailer)
-    console.log(`Reset token: ${resetToken}`); // For testing only
+    // Send email
+    const resetURL = `${process.env.BASE_URL}/reset-password/${resetToken}`;
+    await sendVerificationEmail({
+      to: user.email,
+      subject: 'Password Reset Request',
+      text: `You requested a password reset. Click here to reset: ${resetURL}`,
+    });
 
     res.status(200).json({
       success: true,
@@ -102,11 +107,6 @@ exports.resetPassword = async (req, res, next) => {
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
     await user.save();
-
-    // Generate new JWT (optional)
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: '30d',
-    });
 
     res.status(200).json({
       success: true,
@@ -320,8 +320,6 @@ exports.updateEmail = async (req, res) => {
 // @route   PUT /api/auth/
 exports.verifyEmail = async (req, res) => {
     try {
-      console.log(req.params.token);
-      console.log(req.params);
       const hashedToken = crypto.createHash('sha256').update(req.params.token).digest('hex');
 
       const user = await User.findOne({

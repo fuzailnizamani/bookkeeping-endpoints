@@ -18,8 +18,6 @@ const dashboardRoutes = require('./routes/dashboardRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
 const cookieParser = require('cookie-parser');
 const notificationRoutes = require('./routes/notificationRoutes');
-// Connect to MongoDB
-console.log("Database URI:", process.env.DATABASE_URI);
 connectDB();
 
 const PORT = process.env.PORT || 3000;

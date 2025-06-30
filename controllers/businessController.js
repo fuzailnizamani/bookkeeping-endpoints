@@ -60,9 +60,6 @@ exports.inviteEmployee = async (req, res, next) => {
     });
     await business.save();
 
-    // In production: Send email invitation
-    console.log(`Invitation sent to ${email}`);
-
     // Create notification for invited employee
     await createNotification({
       userId: employee._id,
@@ -118,36 +115,16 @@ exports.getEmployees = async (req, res, next) => {
 exports.handleInvitation = async (req, res, next) => {
   try {
     const { businessId, action } = req.body;
-
-    console.log("Action:", action);
-    console.log("Business ID:", businessId);
-    console.log("Current User ID:", req.user.id);
-
     const business = await Business.findById(businessId);
 
     if (!business) {
       return next(new ErrorResponse('Business not found', 404));
     }
 
-    console.log(req.originalUrl)
-
-    // Debug current employee list
-    console.log("Employees:", business.employees.map(e => ({
-      user: e.user?.toString(),
-      status: e.status
-    })));
-
     // Find the employee's invitation
     const employeeIndex = business.employees.findIndex(
       emp => emp.user.toString() === req.user.id && emp.status === 'pending'
     );
-
-    console.log("Employee user IDs:", business.employees.map(e => e.user.toString()));
-    console.log("Current user ID:", req.user.id);
-
-    console.log("Action:", action); // should be 'accept' or 'reject'
-    console.log("businessId:", businessId); // should not be undefined
-
 
     if (employeeIndex === -1) {
       return next(new ErrorResponse('No pending invitation found', 400));
@@ -178,7 +155,7 @@ exports.handleInvitation = async (req, res, next) => {
 // @route   GET /api/business/my-business
 exports.getMyBusiness = async (req, res, next) => {
   try {
-    const business = await Business.findOne({ owner: req.user.id })
+    const business = await Business.find({ owner: req.user.id })
       .populate('employees.user', 'name email role');
 
     if (!business) {
