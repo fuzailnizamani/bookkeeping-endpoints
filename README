@@ -46,8 +46,8 @@ Built as a **personal project** to practice and demonstrate my **backend develop
 
 ### 📬 API Documentation
 
-✅ Fully documented with **Postman:**
-👉 [View Public Postman Collection](https://documenter.getpostman.com/view/41653364/2sB34ZrQE3)
+✅ Fully documented with [![Postman](https://img.shields.io/badge/Postman-orange?logo=postman&logoColor=white)](https://documenter.getpostman.com/view/41653364/2sB34ZrQE3)
+
 
 ---
 
@@ -110,7 +110,7 @@ npm run dev
 ✅ **Reports:** `/api/reports`
 ✅ **Dashboard:** `/api/dashboard`
 
-Use the [Postman collection](https://documenter.getpostman.com/view/41653364/2sB34ZrQE3) for pre-configured examples.
+Use the [![Postman](https://img.shields.io/badge/Postman-orange?logo=postman&logoColor=white)](https://documenter.getpostman.com/view/41653364/2sB34ZrQE3) for pre-configured examples.
 
 ---
 
@@ -124,9 +124,10 @@ The API is fully tested with Postman and organized for real-world bookkeeping us
 
 ## 📢 Connect with me
 **Fuzail Nizamani**## 📢 Connect with me
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/your-link/)
-[![GitHub](https://img.shields.io/badge/GitHub-black?logo=github&logoColor=white)](https://github.com/your-username)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/fuzail-nizamani-4a2256354?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
+[![GitHub](https://img.shields.io/badge/GitHub-black?logo=github&logoColor=white)](https://github.com/fuzailnizamani)
 [![Postman](https://img.shields.io/badge/Postman-orange?logo=postman&logoColor=white)](https://documenter.getpostman.com/view/41653364/2sB34ZrQE3)
+
 
 
 ## 🪪 License
