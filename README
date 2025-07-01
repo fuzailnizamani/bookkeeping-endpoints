@@ -1,8 +1,4 @@
-![Node.js](https://img.shields.io/badge/Node.js-v18.x-green) 
-![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-green) 
-![License](https://img.shields.io/badge/license-MIT-blue)
-
-## 📚 Bookkeeping API
+##📚 Bookkeeping API
 
 A fully functional **RESTful API** for bookkeeping — including **user authentication**, **transactions**, **categories**, **reports**, and secure **email verification**.
 Built as a **personal project** to practice and demonstrate my **backend development skills** using **Node.js**, **Express.js**, and **MongoDB**.
@@ -127,10 +123,11 @@ The API is fully tested with Postman and organized for real-world bookkeeping us
 ---
 
 ## 📢 Connect with me
-**Fuzail Nizamani**
-* [GitHub](https://github.com/fuzailnizamani/bookkeeping-endpoints.git)
-* [Postman Docs](https://documenter.getpostman.com/view/41653364/2sB34ZrQE3)
-* [LinkedIn](https://www.linkedin.com/in/fuzail-nizamani-4a2256354?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
+**Fuzail Nizamani**## 📢 Connect with me
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/your-link/)
+[![GitHub](https://img.shields.io/badge/GitHub-black?logo=github&logoColor=white)](https://github.com/your-username)
+[![Postman](https://img.shields.io/badge/Postman-orange?logo=postman&logoColor=white)](https://documenter.getpostman.com/view/41653364/2sB34ZrQE3)
+
 
 ## 🪪 License
 Open source — for learning and demonstration purposes only.
