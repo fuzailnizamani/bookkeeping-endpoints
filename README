@@ -1,1 +1,132 @@
-# bookkeeping endpoint
+## 📚 Bookkeeping API
+
+A fully functional **RESTful API** for bookkeeping — including **user authentication**, **transactions**, **categories**, **reports**, and secure **email verification**.
+Built as a **personal project** to practice and demonstrate my **backend development skills** using **Node.js**, **Express.js**, and **MongoDB**.
+
+---
+
+### 🚀 Features
+
+✅ User registration & login with JWT access/refresh tokens
+✅ Secure password reset via email token
+✅ Update and verify email address with secure token
+✅ CRUD operations for businesses, transactions, categories, and reports
+✅ Role-based access control (Admin/User)
+✅ Dashboard endpoints for summary stats
+✅ Centralized error handling & request logging
+✅ Tested & documented with a **public Postman collection**
+
+---
+
+### ⚙️ Tech Stack
+
+* **Backend:** Node.js, Express.js
+* **Database:** MongoDB, Mongoose
+* **Authentication:** JWT, Bcrypt, Cookies
+* **Email Service:** Nodemailer
+* **Utilities:** dotenv, cookie-parser, custom logger
+
+---
+
+### 📂 Project Structure
+
+```bash
+📦 bookkeeping-endpoints
+ ┣ 📂 config          # DB connection
+ ┣ 📂 controllers     # Route handlers
+ ┣ 📂 models          # Mongoose schemas
+ ┣ 📂 routes          # API endpoints
+ ┣ 📂 middleware      # Auth, error handler, logger
+ ┣ 📂 utils           # Helper functions (email, error response)
+ ┣ 📄 server.js       # Entry point
+ ┗ 📄 .env.example    # Sample environment variables
+```
+
+---
+
+### 📬 API Documentation
+
+✅ Fully documented with **Postman:**
+👉 [View Public Postman Collection](https://documenter.getpostman.com/view/41653364/2sB34ZrQE3)
+
+---
+
+### 🛠️ Getting Started
+
+#### 1️⃣ Clone the repository
+
+```bash
+git clone https://github.com/fuzailnizamani/bookkeeping-endpoints.git
+cd bookkeeping-endpoints
+```
+
+#### 2️⃣ Install dependencies
+
+```bash
+npm install
+```
+
+#### 3️⃣ Create `.env`
+
+Copy `.env.example` and fill in your own environment variables:
+
+```env
+PORT=3000
+MONGO_URI=YOUR_MONGODB_URI
+JWT_SECRET=YOUR_JWT_SECRET
+ACCESS_TOKEN_SECRET=YOUR_ACCESS_SECRET
+REFRESH_TOKEN_SECRET=YOUR_REFRESH_SECRET
+EMAIL_HOST=smtp.example.com
+EMAIL_PORT=587
+EMAIL_USER=youremail@example.com
+EMAIL_PASS=your_email_password
+BASE_URL=http://localhost:3000
+```
+
+#### 4️⃣ Run the app
+
+```bash
+npm run dev
+```
+
+---
+
+### 🚦 Available Routes
+
+✅ **Auth & Users:**
+
+* Register: `POST /api/auth/register`
+* Login: `POST /api/auth/login`
+* Refresh Token: `POST /api/auth/refreshToken`
+* Forgot Password: `POST /api/auth/forgot-password`
+* Reset Password: `PUT /api/auth/reset-password/:resettoken`
+* Update Profile: `PUT /api/auth/update`
+* Update Email: `PUT /api/auth/update`
+* Verify Email: `PUT /api/auth/verify-email-change/:token`
+
+✅ **Businesses:** `/api/business`
+✅ **Transactions:** `/api/transactions`
+✅ **Categories:** `/api/categories`
+✅ **Reports:** `/api/reports`
+✅ **Dashboard:** `/api/dashboard`
+
+Use the [Postman collection](https://documenter.getpostman.com/view/41653364/2sB34ZrQE3) for pre-configured examples.
+
+---
+
+## ✨ About
+
+**This is a self-built backend API project developed to sharpen my skills in Node.js, Express.js, and MongoDB.
+It demonstrates practical features like secure user authentication, JWT token handling, email verification workflows, and modular route design.
+The API is fully tested with Postman and organized for real-world bookkeeping use cases such as managing transactions, categories, businesses, and reports**
+
+---
+
+## 📢 Connect with me
+**Fuzail Nizamani**
+* [GitHub](https://github.com/fuzailnizamani/bookkeeping-endpoints.git)
+* [Postman Docs](https://documenter.getpostman.com/view/41653364/2sB34ZrQE3)
+* [LinkedIn](https://www.linkedin.com/in/fuzail-nizamani-4a2256354?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
+
+## 🪪 License
+Open source — for learning and demonstration purposes only.
